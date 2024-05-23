@@ -1,54 +1,91 @@
-### AIFFEL Campus Online Code Peer Review Templete
----
+# AIFFEL Campus Code Peer Review Templete
 - 코더 : 김원영
-- 리뷰어 : 강대식
-  
-#### PRT(Peer Review Template)
----
-##### 1. 주어진 문제를 해결하는 완성된 코드가 제출되었나요?
+- 리뷰어 : 김재이
 
-  - [v] 문제에서 요구하는 최종 결과물이 첨부되었는지 확인
+
+# PRT(Peer Review Template)
+[ㅇ]  **1. 주어진 문제를 해결하는 완성된 코드가 제출되었나요?**
+- 문제에서 요구하는 기능이 정상적으로 작동합니다.
+```
+문제1
+def find_min_max(numbers):
+    min_value = float('inf')
+    max_value = float('-inf')
+
+    def update_min_max(num):
+        nonlocal min_value, max_value
+        if num < min_value:
+            min_value = num
+        if num > max_value:
+            max_value = num
+
+    for num in numbers:
+        update_min_max(num)
+
+    def get_min():
+        return min_value
+
+    def get_max():
+        return max_value
+    return get_min, get_max
+
+결과:
+최솟값: 3
+최댓값: 12
+
+문제2
+코드:
+def counter(func):
+    def wrapper(*args, **kwargs):
+        wrapper.count += 1
+        print(f"{func.__name__} 실행횟수: {wrapper.count}")
+        return func(*args, **kwargs)
+    wrapper.count = 0
+    return wrapper
+
+@counter
+def say_hello():
+    print("Hello Aiffel!")
+
+for i in range(5):
+    say_hello()
+
+결과물:
+
+say_hello 실행횟수: 1
+Hello Aiffel!
+say_hello 실행횟수: 2
+Hello Aiffel!
+say_hello 실행횟수: 3
+Hello Aiffel!
+say_hello 실행횟수: 4
+Hello Aiffel!
+say_hello 실행횟수: 5
+Hello Aiffel!
+```
     
-     ![image](https://github.com/timothy2077/1st-Rep/assets/169737731/40a20aeb-c49a-41ff-ac51-e11a5ab4221a)
+[ㅇ]  **2. 핵심적이거나 복잡하고 이해하기 어려운 부분에 작성된 설명을 보고 해당 코드가 잘 이해되었나요?**
+- 특히 문제2에서 주석으로서 실행하시는 프로그램 구조가 잘 눈에 보이도록 설명해주셨습니다.
+```
+#데코레이터 함수의 내부 함수(wrapper)에서 원래 함수(func)를 호출을 위해 함수이름.__name__으로 지정
+#내부 함수(wrapper)에서 실행 횟수를 기록
+#초기 실행 횟수를 0으로 설정
+#say_hello 함수에 @counter 데코레이터를 적용
+```
+      
+[ㅇ]  **3. 에러가 난 부분을 디버깅하여 “문제를 해결한 기록”을 남겼나요? 또는 “새로운 시도 및 추가 실험”을 해봤나요?**
+- 문제2를 도전하실 때, 출력 내용이 반순차적으로 출력되는 부분이 있었고, 해결하신 것을 알 수 있었습니다. 파일에 기록되어 있지는 않지만, 피어리뷰에서 잘 설명해주셨습니다.
+        
+[ㅇ]  **4. 회고를 잘 작성했나요?**
+- 프로젝트 결과물에 대해 배운점이 잘 적혀있습니다.
+```
+회고 1
+find_min_max 함수는 find_min과 find_max 함수를 반환하며 이 두 함수는 주어진 숫자 리스트 numbers의 최솟값과 최댓값을 반환하게 되는데 클로저를 사용하여 min_value와 max_value 변수를 외부에 노출하지 않고도 최솟값과 최대값을 찾을 수 있다.
+더불어 find_min_max 함수가 호출된 이후에도 find_min과 find_max 함수를 통해 min_value와 max_value 변수에 접근할 수 있는데 하기 코드를 실행하면 예측한데로 최솟값 3과 최댓값 12가 출력되는 것을 확인할 수 있다.
 
-    
-##### 2. 전체 코드에서 가장 핵심적이거나 가장 복잡하고 이해하기 어려운 부분에 작성된 주석 또는 doc string을 보고 해당 코드가 잘 이해되었나요?
-
-  - [v] 해당 코드 블럭에 doc string/annotation이 달려 있는지 확인
-  - [v] 해당 코드가 무슨 기능을 하는지, 왜 그렇게 짜여진건지, 작동 메커니즘이 뭔지 기술.
-  - [v] 주석을 보고 코드 이해가 잘 되었는지 확인
-    - [v] 잘 작성되었다고 생각되는 부분을 캡쳐해 근거로 첨부합니다.
-
-    ![image](https://github.com/timothy2077/1st-Rep/assets/169737731/ac0cd5a6-21f3-4b15-b467-e51b97254f5c)
-
-    
-##### 3. 에러가 난 부분을 디버깅하여 문제를 “해결한 기록을 남겼거나” ”새로운 시도 또는 추가 실험을 수행”해봤나요?
-
-  - [v] 문제 원인 및 해결 과정을 잘 기록하였는지 확인
-  - [v] 문제에서 요구하는 조건에 더해 추가적으로 수행한 나만의 시도, 실험이 기록되어 있는지 확인
-
-    ![image](https://github.com/timothy2077/1st-Rep/assets/169737731/ed8554b7-4c97-4e34-8be4-8dfa830f73aa)
-
-    출력 결과에서 순서가 다음 예시와 바뀌기는 했지만 좋은 디버깅 과정인 것 같습니다.
-    [출력 결과 예]
-    Hello Aiffel!
-    say_hello 실행횟수: 1
-     
-    
-##### 4. 회고를 잘 작성했나요?
-
-  - [v] 주어진 문제를 해결하는 완성된 코드 내지 프로젝트 결과물에 대해 배운점과 아쉬운점, 느낀점 등이 기록되어 있는지 확인
-
-    ![image](https://github.com/timothy2077/1st-Rep/assets/169737731/ff946d23-c0dc-4d81-bcf0-0baabcad9b87)
-
-          
-##### 5. 코드가 간결하고 효율적인가요?
-
-  - [v] 파이썬 스타일 가이드 (PEP8) 를 준수하였는지 확인
-  - [v] 하드코딩을 하지않고 함수화, 모듈화가 가능한 부분은 함수를 만들거나 클래스로 짰는지
-  - [v] 코드 중복을 최소화하고 범용적으로 사용할 수 있도록 함수화했는지
-
-##### 6. 코드 리뷰 및 개인 의견
-  - 코드 구현에 필요한 정보를 빠르게 찾아 잘 적용을 하셨고, 데코레이터 함수에 대해서도 잘 설명해 주셨습니다. 코딩을 하면서 발생되었던
-    문제에 대해서도 잘 설명을 해주셨습니다. 화이팅입니다 ~~
-  
+회고 2
+하기 코드를 통해 counter 데코레이터는 함수가 실행될 때마다 실행 횟수를 기록하고 출력하도록 만들었으며 say_hello 함수에 @counter 데코레이터를 적용하여 실행 횟수를 추적하도록 명령하였다.
+결론적으로 @counter 데코레이터를 적용하여 say_hello 함수를 수정하였으며 그 결과 이제 say_hello 함수를 호출할 때마다 실행 횟수가 증가하며 출력되는 것을 확인할 수 있다.
+```
+- 아쉬운점, 느낀점 역시 피어리뷰에서 공유해주셨습니다. wrapper 함수 부분에서 매개변수를 지정하신 부분을 의논했을 때는 매개변수 없이 하는 프로그래밍과의 차이를 같이 고민할 수 있었습니다.
+ 
